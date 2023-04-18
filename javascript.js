@@ -14,9 +14,11 @@
 
 
 let firstNumber=""
-let secondNumber = 3
+let calculation
+let secondNumber = 33
 let operator;
 const displayMainText = document.querySelector('#text');
+const displaySubText = document.querySelector('#subText');
 
 function add (a, b) {
     return parseInt(a) + parseInt(b);
@@ -40,33 +42,47 @@ function identifyOperator (operator, firstNumber, secondNumber) {
         button.addEventListener('click', () => {
            executeOperator(button.id)
         })
-        
     })
 };
 
 function executeOperator (value) {
-    if (value === "divide") {
-        firstNumber = divide (firstNumber, secondNumber);
-        firstNumber = firstNumber.toString();
-        updateDisplay(firstNumber);
-        } else if (value === "multiply") {
-            firstNumber = multiply (firstNumber, secondNumber);
+        if (value === "divide") {
+            calculation = firstNumber + " / " + secondNumber;
+            firstNumber = divide (firstNumber, secondNumber);
             firstNumber = firstNumber.toString();
-            updateDisplay(firstNumber);;
-        } else if (value === "subtract") {
-            firstNumber = subtract (firstNumber, secondNumber);
-            firstNumber = firstNumber.toString();
-            updateDisplay(firstNumber);;
-        } else if (value === "add") {
-            firstNumber = add (firstNumber, secondNumber);
-            firstNumber = firstNumber.toString();
-            updateDisplay(firstNumber);;
-        }
+            executeEqual();
+            } else if (value === "multiply") {
+                calculation = firstNumber + " x " + secondNumber;
+                firstNumber = multiply (firstNumber, secondNumber);
+                firstNumber = firstNumber.toString();
+                executeEqual();
+            } else if (value === "subtract") {
+                calculation = firstNumber + " - " + secondNumber;
+                firstNumber = subtract (firstNumber, secondNumber);
+                firstNumber = firstNumber.toString();
+                executeEqual();
+            } else if (value === "add") {
+                calculation = firstNumber + " + " + secondNumber;
+                firstNumber = add (firstNumber, secondNumber);
+                firstNumber = firstNumber.toString();
+                executeEqual();
+            }
 };
+
+function executeEqual () {
+    const equalPress = document.querySelector('#equal');
+    equalPress.addEventListener('click', () => {
+        updateSubDisplay(calculation);
+        updateDisplay(firstNumber);
+    })
+}
 
 function updateDisplay (value) {
     displayMainText.innerHTML = value
+};
 
+function updateSubDisplay (value) {
+    displaySubText.innerHTML = value;
 };
 
 function findNumberPress () {
@@ -105,6 +121,7 @@ function clearDisplay () {
     clear.addEventListener('click', () => {
         firstNumber = "";
         updateDisplay(0);
+        updateSubDisplay("");
         })
 };
 
@@ -112,8 +129,7 @@ function backspace () {
     const backspacePress = document.querySelector('#backspace')
     backspacePress.addEventListener('click', () => {
         if (firstNumber.length === 1) {
-            shorterString = firstNumber.substring(0, (firstNumber.length - 1));
-            firstNumber = shorterString;
+            firstNumber = "0"
             updateDisplay(0);
         } else {
         let shorterString;
@@ -129,6 +145,7 @@ function calculate () {
     clearDisplay ();
     backspace();
     identifyOperator ();
+    executeOperator();
     
 };
 calculate();
