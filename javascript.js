@@ -1,3 +1,18 @@
+// user presses buttons
+// buttons change disply and update variables
+//at any time a button will update disply and variables, ie
+// 0 + 1 will =1
+//we need to store data in teh varaibles while moving from first number to 
+// operator to second number
+// then compute the operation, return the display, and reset teh variables to 
+// current disply is first number, second number is blank again
+
+// the calculate function
+// should take in first number button presses, operation, then second number
+// then update first number to be the solution
+// while displaying everything
+
+
 let firstNumber=""
 let secondNumber = 3
 let operator;
@@ -5,7 +20,7 @@ let displayValue;
 const displaytext = document.querySelector('#text');
 
 function add (a, b) {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 };
 
 function subtract (a, b) {
@@ -52,7 +67,7 @@ function findNumberPress () {
     numberPress.forEach((button) =>{
         button.addEventListener('click', () => {
             if (button.id === "one") {
-            firstNumber += "1"
+                firstNumber += "1"
             } else if (button.id === "two") {
                 firstNumber += "2"
             } else if (button.id === "three") {
@@ -78,10 +93,36 @@ function findNumberPress () {
     })
 };
 
+function clearDisplay () {
+    const clear = document.querySelector('#clear');
+    clear.addEventListener('click', () => {
+        firstNumber = "";
+        updateDisplay(0);
+        })
+};
+
+function backspace () {
+    const backspacePress = document.querySelector('#backspace')
+    backspacePress.addEventListener('click', () => {
+        if (firstNumber.length === 1) {
+            shorterString = firstNumber.substring(0, (firstNumber.length - 1));
+            firstNumber = shorterString;
+            updateDisplay(0);
+        } else {
+        let shorterString;
+        shorterString = firstNumber.substring(0, (firstNumber.length - 1));
+        firstNumber = shorterString;
+        updateDisplay (firstNumber);
+        }
+    })
+};
+
 function calculate () {
     findNumberPress();
+    clearDisplay ();
+    backspace();
+    identifyOperator ();
     
-}
+};
+calculate();
 
-findNumberPress();
-executeOperator ()
