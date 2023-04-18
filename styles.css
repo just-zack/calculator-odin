@@ -36,7 +36,8 @@ body {
     font-size: 35pt;
     font-weight: 100;
     padding: 10px;
-    margin-bottom: 20px;
+    max-width: 250px;
+    flex-shrink: auto;
 }
 
 .spacer {

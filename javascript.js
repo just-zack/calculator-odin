@@ -1,5 +1,5 @@
-let firstNumber= []
-let secondNumber;
+let firstNumber=""
+let secondNumber = 3
 let operator;
 let displayValue;
 const displaytext = document.querySelector('#text');
@@ -20,8 +20,26 @@ function divide (a, b) {
     return a/b;
 };
 
-function operate (operator, firstNumber, secondNumber) {
-    
+function identifyOperator (operator, firstNumber, secondNumber) {
+    const operatorPress = document.querySelectorAll('.operation');
+    operatorPress.forEach((button) =>{
+        button.addEventListener('click', () => {
+           executeOperator(button.id)
+        })
+        
+    })
+};
+
+function executeOperator (value) {
+    if (value === "divide") {
+        updateDisplay(divide (firstNumber, secondNumber));
+        } else if (value === "multiply") {
+            updateDisplay(multiply (firstNumber, secondNumber));
+        } else if (value === "subtract") {
+            updateDisplay(subtract (firstNumber, secondNumber));
+        } else if (value === "add") {
+            updateDisplay(add (firstNumber, secondNumber));
+        }
 };
 
 function updateDisplay (value) {
@@ -34,34 +52,36 @@ function findNumberPress () {
     numberPress.forEach((button) =>{
         button.addEventListener('click', () => {
             if (button.id === "one") {
-            firstNumber.push(1)
+            firstNumber += "1"
             } else if (button.id === "two") {
-                firstNumber.push(2)
+                firstNumber += "2"
             } else if (button.id === "three") {
-                firstNumber.push(3)
+                firstNumber += "3"
             } else if (button.id === "four") {
-                firstNumber.push(4)
+                firstNumber += "4"
             } else if (button.id === "five") {
-                firstNumber.push(5)
+                firstNumber += "5"
             } else if (button.id === "six") {
-                firstNumber.push(6)
+                firstNumber += "6"
             } else if (button.id === "seven") {
-                firstNumber.push(7)
+                firstNumber += "7"
             } else if (button.id === "eight") {
-                firstNumber.push(8)
+                firstNumber += "8"
             } else if (button.id === "nine") {
-                firstNumber.push(9)
+                firstNumber += "9"
             } else if (button.id === "zero") {
-                firstNumber.push(0)
+                firstNumber += "0"
             }
-            let firstNumberToString = firstNumber.toString("");
-            updateDisplay (firstNumberToString);
+            updateDisplay (firstNumber);
         })
         
     })
 };
 
-function convertNumberIdToNumber () {
-
+function calculate () {
+    findNumberPress();
+    
 }
-findNumberPress()
+
+findNumberPress();
+executeOperator ()
