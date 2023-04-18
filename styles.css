@@ -35,9 +35,8 @@ body {
 #text {
     font-size: 35pt;
     font-weight: 100;
-    align-items: end;
     padding: 10px;
-
+    margin-bottom: 20px;
 }
 
 .spacer {
