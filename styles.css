@@ -22,11 +22,22 @@ body {
 }
 
 #display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     background-color: #BFBF9E;
     width: 270px;
     height: 80px;
     border-radius: 5px;
     border: solid black 5px;
+}
+
+#text {
+    font-size: 35pt;
+    font-weight: 100;
+    align-items: end;
+    padding: 10px;
+
 }
 
 .spacer {
