@@ -16,7 +16,7 @@
 let firstNumber=""
 let secondNumber = 3
 let operator;
-const displaytext = document.querySelector('#text');
+const displayMainText = document.querySelector('#text');
 
 function add (a, b) {
     return parseInt(a) + parseInt(b);
@@ -47,21 +47,25 @@ function identifyOperator (operator, firstNumber, secondNumber) {
 function executeOperator (value) {
     if (value === "divide") {
         firstNumber = divide (firstNumber, secondNumber);
+        firstNumber = firstNumber.toString();
         updateDisplay(firstNumber);
         } else if (value === "multiply") {
             firstNumber = multiply (firstNumber, secondNumber);
+            firstNumber = firstNumber.toString();
             updateDisplay(firstNumber);;
         } else if (value === "subtract") {
             firstNumber = subtract (firstNumber, secondNumber);
+            firstNumber = firstNumber.toString();
             updateDisplay(firstNumber);;
         } else if (value === "add") {
             firstNumber = add (firstNumber, secondNumber);
+            firstNumber = firstNumber.toString();
             updateDisplay(firstNumber);;
         }
 };
 
 function updateDisplay (value) {
-    displaytext.innerHTML = value
+    displayMainText.innerHTML = value
 
 };
 

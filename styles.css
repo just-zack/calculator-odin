@@ -23,21 +23,27 @@ body {
 
 #display {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
     background-color: #BFBF9E;
-    width: 270px;
-    height: 80px;
+    width: 250px;
+    height: 60px;
     border-radius: 5px;
     border: solid black 5px;
+    padding: 10px;
+}
+#subText {
+    font-size: 15pt;
+    font-weight: 30;
+    margin: 0px;
 }
 
 #text {
-    font-size: 35pt;
+    font-size: 25pt;
     font-weight: 100;
-    padding: 10px;
     max-width: 250px;
-    flex-shrink: auto;
+    margin: 0px;
 }
 
 .spacer {
