@@ -103,3 +103,12 @@ button.operation {
     height: 56px;
     width: 56px;
 }
+
+button.equal {
+    background-color: darkcyan;
+    color: antiquewhite;
+    border-radius: 10px;
+    border: darkblue solid 5px;
+    height: 56px;
+    width: 56px;
+}

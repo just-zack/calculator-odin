@@ -13,10 +13,11 @@
 // while displaying everything
 
 
-let firstNumber=""
-let calculation
-let secondNumber = 33
+let firstNumber="";
+let transitNumber;
+let calculation;
 let operator;
+let secondNumber = "";
 const displayMainText = document.querySelector('#text');
 const displaySubText = document.querySelector('#subText');
 
@@ -33,48 +34,73 @@ function multiply (a, b) {
 };
 
 function divide (a, b) {
-    return a/b;
+    if (b === ""){
+        return "undefined";
+    } return a/b;
 };
 
-function identifyOperator (operator, firstNumber, secondNumber) {
+function identifyOperator () {
     const operatorPress = document.querySelectorAll('.operation');
     operatorPress.forEach((button) =>{
         button.addEventListener('click', () => {
-           executeOperator(button.id)
+            storeFirstNumber();
+            operator = button.id;
+            if (operator === "divide") {
+                calculation = transitNumber + " /"
+            } else if (operator === "multiply") {
+                calculation = transitNumber + " x"
+            } else if (operator === "subtract") {
+                calculation = transitNumber + " -"
+            } else if (operator === "add") {
+                calculation = transitNumber + " +"
+            }
+            updateSubDisplay(calculation);
+            updateDisplay (firstNumber);
         })
     })
 };
 
-function executeOperator (value) {
-        if (value === "divide") {
-            calculation = firstNumber + " / " + secondNumber;
-            firstNumber = divide (firstNumber, secondNumber);
-            firstNumber = firstNumber.toString();
-            executeEqual();
-            } else if (value === "multiply") {
-                calculation = firstNumber + " x " + secondNumber;
-                firstNumber = multiply (firstNumber, secondNumber);
-                firstNumber = firstNumber.toString();
-                executeEqual();
-            } else if (value === "subtract") {
-                calculation = firstNumber + " - " + secondNumber;
-                firstNumber = subtract (firstNumber, secondNumber);
-                firstNumber = firstNumber.toString();
-                executeEqual();
-            } else if (value === "add") {
-                calculation = firstNumber + " + " + secondNumber;
-                firstNumber = add (firstNumber, secondNumber);
-                firstNumber = firstNumber.toString();
-                executeEqual();
-            }
+function executeOperator () {
+    if (operator == "divide") {
+        secondNumber = divide (transitNumber, firstNumber);
+        calculation = transitNumber + " / " + firstNumber + " =";
+        secondNumber = secondNumber.toString();
+        } else if (operator == "multiply") {
+            secondNumber = multiply (transitNumber, firstNumber);
+            calculation = transitNumber + " x " + firstNumber + " =";
+            secondNumber = secondNumber.toString();
+        } else if (operator == "subtract") {
+            secondNumber = subtract (transitNumber, firstNumber);
+            calculation = transitNumber + " - " + firstNumber + " =";
+            secondNumber = secondNumber.toString();
+        } else if (operator == "add") {
+            secondNumber = add (transitNumber, firstNumber);
+            calculation = transitNumber + " + " + firstNumber + " =";
+            secondNumber = secondNumber.toString();
+        }
+        updateSubDisplay(calculation);
+        updateDisplay(secondNumber);
+        console.log(secondNumber);
+        console.log(calculation);
+        console.log(firstNumber);
+        console.log(operator);
 };
 
 function executeEqual () {
     const equalPress = document.querySelector('#equal');
     equalPress.addEventListener('click', () => {
-        updateSubDisplay(calculation);
-        updateDisplay(firstNumber);
+        executeOperator();
+        console.log (firstNumber);
+        console.log (secondNumber);
+        console.log (operator);
+        console.log (calculation);
+        
     })
+}
+
+function storeFirstNumber () {
+    transitNumber = firstNumber;
+    firstNumber = "";
 }
 
 function updateDisplay (value) {
@@ -141,11 +167,11 @@ function backspace () {
 };
 
 function calculate () {
-    findNumberPress();
     clearDisplay ();
     backspace();
     identifyOperator ();
-    executeOperator();
+    findNumberPress();
+    executeEqual();
     
 };
 calculate();
