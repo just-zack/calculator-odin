@@ -1,18 +1,3 @@
-// user presses buttons
-// buttons change disply and update variables
-//at any time a button will update disply and variables, ie
-// 0 + 1 will =1
-//we need to store data in teh varaibles while moving from first number to 
-// operator to second number
-// then compute the operation, return the display, and reset teh variables to 
-// current disply is first number, second number is blank again
-
-// the calculate function
-// should take in first number button presses, operation, then second number
-// then update first number to be the solution
-// while displaying everything
-
-
 let firstNumber="";
 let transitNumber;
 let calculation;
@@ -63,7 +48,7 @@ function identifyOperator () {
 function executeOperator () {
     if (operator === "divide") {
         if (firstNumber === "0") {
-            secondNumber = "Undefined"
+            secondNumber = "undefined"
         } else { secondNumber = divide (transitNumber, firstNumber);
             calculation = transitNumber + " / " + firstNumber + " =";
             secondNumber = secondNumber.toString();
@@ -89,7 +74,7 @@ function executeEqual () {
     const equalPress = document.querySelector('#equal');
     equalPress.addEventListener('click', () => {
         executeOperator();
-        if (secondNumber === "Undefined") {
+        if (secondNumber === "undefined") {
             secondNumber = ""
         };
         firstNumber = secondNumber;
