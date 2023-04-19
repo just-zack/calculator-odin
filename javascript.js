@@ -62,22 +62,25 @@ function identifyOperator () {
 
 function executeOperator () {
     if (operator === "divide") {
-        secondNumber = divide (transitNumber, firstNumber);
-        calculation = transitNumber + " / " + firstNumber + " =";
-        secondNumber = secondNumber.toString();
-        } else if (operator === "multiply") {
-            secondNumber = multiply (transitNumber, firstNumber);
-            calculation = transitNumber + " x " + firstNumber + " =";
-            secondNumber = secondNumber.toString();
-        } else if (operator === "subtract") {
-            secondNumber = subtract (transitNumber, firstNumber);
-            calculation = transitNumber + " - " + firstNumber + " =";
-            secondNumber = secondNumber.toString();
-        } else if (operator === "add") {
-            secondNumber = add (transitNumber, firstNumber);
-            calculation = transitNumber + " + " + firstNumber + " =";
+        if (firstNumber === "0") {
+            secondNumber = "Undefined"
+        } else { secondNumber = divide (transitNumber, firstNumber);
+            calculation = transitNumber + " / " + firstNumber + " =";
             secondNumber = secondNumber.toString();
         }
+    } else if (operator === "multiply") {
+        secondNumber = multiply (transitNumber, firstNumber);
+        calculation = transitNumber + " x " + firstNumber + " =";
+        secondNumber = secondNumber.toString();
+    } else if (operator === "subtract") {
+        secondNumber = subtract (transitNumber, firstNumber);
+        calculation = transitNumber + " - " + firstNumber + " =";
+        secondNumber = secondNumber.toString();
+    } else if (operator === "add") {
+        secondNumber = add (transitNumber, firstNumber);
+        calculation = transitNumber + " + " + firstNumber + " =";
+        secondNumber = secondNumber.toString();
+    }
         updateSubDisplay(calculation);
         updateDisplay(secondNumber);
 };
@@ -86,6 +89,9 @@ function executeEqual () {
     const equalPress = document.querySelector('#equal');
     equalPress.addEventListener('click', () => {
         executeOperator();
+        if (secondNumber === "Undefined") {
+            secondNumber = ""
+        };
         firstNumber = secondNumber;
         secondNumber ="";
     })
